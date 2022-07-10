@@ -21,11 +21,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/hello', function() {
-    $usdc = "15";
-
-    return view('hello' , compact('usdc'));
-});
+Route::get('/hello', [App\Http\Controllers\HelloController::class,'index']);
 
 Route::get('/map-editor', function(){
     return view('web-gl');
