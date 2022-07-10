@@ -10,7 +10,7 @@
                     <h3>Browse and join public rooms - Coming soon</h3>
                     <p>Aside from building worlds and sharing them with your existing friends, you can setup or join public rooms and form your own community</p>
                     <p>Safeguarding for children and adults is something we take very seriously, that's why we have a parental viewer app, 
-                        so you can observe who your child is interacting with. </p>
+                        so you can observe who your child is interacting with and set appropriate boundaries. </p>
                     <p>Public rooms also have age filters plus other parental controls that can be used to define where they can and can't go.</p>
 
                 </div>

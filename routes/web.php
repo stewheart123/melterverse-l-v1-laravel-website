@@ -20,11 +20,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/hello', [App\Http\Controllers\HelloController::class,'index']);
 
 Route::get('/map-editor', function(){
     return view('web-gl');
+});
+
+Route::get('/map-editor-new', function(){
+    return view('map-editor-section');
 });
 
 Route::get('/news', function(){
@@ -45,5 +50,9 @@ Route::get('/maps', function(){
 
 Route::get('/friends', function(){
     return view('user/friends');
+});
+
+Route::get('/marketplace', function(){
+    return view('marketplace');
 });
 
