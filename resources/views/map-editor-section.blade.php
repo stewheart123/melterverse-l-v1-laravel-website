@@ -8,6 +8,11 @@
 @endsection
 
 @section('game-content')
+<p>enter email and password</p>
+<p>need to load up items specific to the user, only way is to input a value into editor, as passed into unity form</p>
+<p>also need to create another user table with more custom info- </p>
+<p>is it possible to create the new user table when the user first registers via the standard auth?</p>
+<p>details are also used to save maps to another table, plus retrieve them after,</p>
 <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">

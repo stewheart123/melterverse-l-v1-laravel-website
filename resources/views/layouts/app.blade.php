@@ -26,7 +26,8 @@
             <div class="container">
                 <a class="navbar-brand text-info" href="{{ url('/') }}">
                  <strong>{{ config('app.name', 'Melterverse v-1') }}</strong><em> ~ prototype the future</em>
-                </a>                
+                </a>   
+                @if (Auth::check())              
                     <a class="navbar-brand" href="/news">News</a>
                     <a class="navbar-brand" href="/instructions">FAQ</a>
                     <a class="navbar-brand" href="/maps">Maps</a>
@@ -34,6 +35,7 @@
                     <a class="navbar-brand" href="/wallet">Wallet</a>
                     <a class="navbar-brand" href="/marketplace">Marketplace</a>
                     <a class="navbar-brand text-info" href="/map-editor-new">Build</a>
+                    @endif
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
