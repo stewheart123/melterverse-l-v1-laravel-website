@@ -18,12 +18,10 @@
               To access your custom Melter Blocks, request a token. In the login screen type in the token and email fields.
               <br><br>
               Click 'Ignore' in the editor to use the default Melter Blocks. 
-              <button type="submit">create token</button>
+              <button type="submit">create access token</button>
               @csrf
             </form>
-            <h3 class="info-text">{!! !empty($map_token) ? $map_token : "click 'create token' " !!} </h3>               
-
-
+            <h3 class="info-text">{!! !empty($token_return_string) ? $token_return_string : "click 'create access token' " !!} </h3>
             <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
