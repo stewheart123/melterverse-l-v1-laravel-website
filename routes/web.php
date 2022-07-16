@@ -24,6 +24,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::get('/hello', [App\Http\Controllers\HelloController::class,'index']);
 
+Route::post('token', [App\Http\Controllers\MapToken::class, 'CreateMapToken']);
+
 Route::get('/map-editor', function(){
     return view('web-gl');
 });

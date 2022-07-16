@@ -27,6 +27,7 @@
 
                 <h4>Custom Avatars</h4>
                 <p>Find unqiue avatars - from the mundane to the abstract</p>
+
                 </div>
             </div>
         </div>

@@ -8,12 +8,23 @@
 @endsection
 
 @section('game-content')
-<p>enter email and password</p>
-<p>need to load up items specific to the user, only way is to input a value into editor, as passed into unity form</p>
-<p>also need to create another user table with more custom info- </p>
-<p>is it possible to create the new user table when the user first registers via the standard auth?</p>
-<p>details are also used to save maps to another table, plus retrieve them after,</p>
-<div id="unity-container" class="unity-desktop">
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+    <div class="card bg-dark bg-gradient text-white">
+        <div class="card-header"><h1>Build Your World</h1></div>
+          <div class="card-body">
+            <form action="token" method="POST" class="pb-2">
+              To access your custom Melter Blocks, request a token. In the login screen type in the token and email fields.
+              <br><br>
+              Click 'Ignore' in the editor to use the default Melter Blocks. 
+              <button type="submit">create token</button>
+              @csrf
+            </form>
+            <h3 class="info-text">{!! !empty($map_token) ? $map_token : "click 'create token' " !!} </h3>               
+
+
+            <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
@@ -88,4 +99,11 @@
       };
       document.body.appendChild(script);
     </script>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
 @endsection
