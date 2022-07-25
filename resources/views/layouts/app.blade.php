@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-dark shadow-sm ">
             <div class="container">
                 <a class="navbar-brand text-info" href="{{ url('/') }}">
-                 <strong>{{ config('app.name', 'Melterverse v-1') }}</strong><em> ~ prototype the future</em>
+                 <strong>{{ config('app.name', 'Melterverse v-1') }}</strong><em> | prototype the future</em>
                 </a>   
                 @if (Auth::check())              
                     <a class="navbar-brand" href="/news">News</a>
