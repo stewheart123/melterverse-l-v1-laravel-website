@@ -1,13 +1,6 @@
 @extends('layouts.app')
 @section('title', 'Markeplace')
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-gl-12 card bg-dark bg-gradient text-white">
-
-        </div>
-    </div>
-</div>
 <div class="container">            
     <div class="row justify-content-center">
         <div class="col-md-8">

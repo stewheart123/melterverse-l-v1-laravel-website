@@ -34,6 +34,7 @@
                     <a class="navbar-brand" href="/friends">Friends</a>
                     <a class="navbar-brand" href="/wallet">Wallet</a>
                     <a class="navbar-brand" href="/marketplace">Marketplace</a>
+                    <a class="navbar-brand" href="/upload">Upload</a>
                     <a class="navbar-brand text-info" href="/map-editor-new">Build</a>
                     @endif
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -88,6 +89,7 @@
         <main class="py-4">        
             @yield('content')
             @yield('game-content')
+            @yield('uploadfiles')
         </main>
     </div>
 </body>
