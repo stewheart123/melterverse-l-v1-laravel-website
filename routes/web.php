@@ -54,9 +54,11 @@ Route::get('/friends', function(){
     return view('user/friends');
 });
 
-Route::get('/marketplace', function(){
-    return view('marketplace');
-});
+Route::get('/marketplace', [App\Http\Controllers\MarketplaceController::class,'ShowAllBlockPacks']);
+
+// Route::get('/marketplace', function(){
+//     return view('marketplace');
+// });
 
 Route::get('/upload', function(){
     return view('uploadfiles');

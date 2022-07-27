@@ -24,6 +24,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $bp_price
  * @property string $bp_pack_contents
  * @property string $bp_additional_currency
+ * @property string $bp_image_location
  *
  * @package App\Models
  */
@@ -52,6 +53,7 @@ class BlockPack extends Model
 		'bp_total_views',
 		'bp_price',
 		'bp_pack_contents',
-		'bp_additional_currency'
+		'bp_additional_currency',
+		'bp_image_location'
 	];
 }
