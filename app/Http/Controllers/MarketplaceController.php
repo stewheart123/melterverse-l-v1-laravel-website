@@ -9,21 +9,36 @@ use Illuminate\Support\Facades\DB;
 
 class MarketplaceController extends Controller
 {
-    //
+    /**
+     * Returns both purchased and available public block packs as arrays
+     *  
+     */
     public function ShowAllBlockPacks(){
         
-        $block_packs = DB::table('block_packs')->where('bp_availability','=','public')->get();
-
+        //returns array of purchased blocks into a string
         $user_block_packs = DB::table('user_details')->where('ud_linking_id','=', Auth::user()->id )->first();
-        $purchase_pack_array = '';
+        
+        $purchase_pack_array = [''];
         if($user_block_packs) {
+            //splits the string back into an array
             $purchase_pack_array = explode(',' , $user_block_packs->ud_packs_purchased );
         }
-        //gets block pack ids with $user_block_packs->ud_packs_purchased
-        //break out the individual pack ids into a list?
-        //return two lists one of the unpurchased and the other is purchased - use the packs_purchased as queries for purchased list, 
-        //
+        //passes array as arguments to include or remove from all block packs respectively
+        $purchased_block_packs = DB::table('block_packs')->whereIn('bp_id', $purchase_pack_array )->where('bp_availability','=','public')->get();
+        $available_block_packs = DB::table('block_packs')->where('bp_availability','=','public')->whereNotIn('bp_id', $purchase_pack_array)->get();
 
-        return view('marketplace' , compact('block_packs', 'purchase_pack_array'));
+        return view('marketplace' , compact('available_block_packs', 'purchased_block_packs'));
+    }
+
+    /** receives a single bp_id
+     * uses auth->id 
+     * gets user-details - via ud_linking matching auth->ID
+     * get packs purchased
+     * checks each pack purchased if matches the input bp_id
+     * if not, appends/ updates the ud_packs_purchased string
+     * redirects to the marketplace view again / via above controller so the db logic is called again.
+     *  */ 
+    public function AddBlockPackToAccount(){
+
     }
 }
