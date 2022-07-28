@@ -54,8 +54,8 @@ Route::get('/friends', function(){
     return view('user/friends');
 });
 
-Route::get('/marketplace', [App\Http\Controllers\MarketplaceController::class,'ShowAllBlockPacks']);
-
+Route::get('/marketplace', [App\Http\Controllers\MarketplaceController::class,'index']);
+Route::post('/addBlockPackToAccount', [App\Http\Controllers\MarketplaceController::class, 'store']);
 // Route::get('/marketplace', function(){
 //     return view('marketplace');
 // });

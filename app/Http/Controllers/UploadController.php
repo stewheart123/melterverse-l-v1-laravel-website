@@ -15,24 +15,24 @@ class UploadController extends Controller
     {
         return view('uploadfile');
     }
+
     public function store(Request $request)
     {
-
         Auth::user()->name;
-    $path = public_path( 'bundles\\'. Auth::user()->name . Auth::user()->id . '\test');
+        $path = public_path( 'bundles\\'. Auth::user()->name . Auth::user()->id . '\test');
 
-    if(!File::isDirectory($path)){
+        if(!File::isDirectory($path)){
 
-        File::makeDirectory($path, 0777, true, true);
+            File::makeDirectory($path, 0777, true, true);
 
-    }
+        }
         
-        $request->validate([
+            $request->validate([
             //application/octet-stream
             'file' =>  ['required','mimetypes:application/octet-stream'],
             //'image.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',
-        ]);
-        if($file = $request->hasFile('file')) {
+            ]);
+        if ($file = $request->hasFile('file')) {
              
             $file = $request->file('file') ;
             $fileName = $file->getClientOriginalName() ;

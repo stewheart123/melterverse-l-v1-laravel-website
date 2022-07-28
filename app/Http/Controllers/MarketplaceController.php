@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Models\BlockPack;
 use App\Models\UserDetail;
 use Auth;
+use Redirect;
 use Illuminate\Support\Facades\DB;
 
 class MarketplaceController extends Controller
@@ -13,11 +14,10 @@ class MarketplaceController extends Controller
      * Returns both purchased and available public block packs as arrays
      *  
      */
-    public function ShowAllBlockPacks(){
+    public function index(){
         
         //returns array of purchased blocks into a string
         $user_block_packs = DB::table('user_details')->where('ud_linking_id','=', Auth::user()->id )->first();
-        
         $purchase_pack_array = [''];
         if($user_block_packs) {
             //splits the string back into an array
@@ -38,7 +38,28 @@ class MarketplaceController extends Controller
      * if not, appends/ updates the ud_packs_purchased string
      * redirects to the marketplace view again / via above controller so the db logic is called again.
      *  */ 
-    public function AddBlockPackToAccount(){
+    public function store(Request $request){
+        //dd($request->pack_id_order);
+        $new_purchase_string = $request->pack_id_order;
+        $user_block_packs = DB::table('user_details')->where('ud_linking_id','=', Auth::user()->id )->first();
+        $purchase_pack_array = [''];
+        $notDuplicate = true;
+        
+            //splits the string back into an array
+            $purchase_pack_array = explode(',' , $user_block_packs->ud_packs_purchased );
+            foreach($purchase_pack_array as $purchase_strings) {
+                if($purchase_strings == $request->pack_id_order ) {
+                    $notDuplicate = false;
+                }
+            }
+            if ($notDuplicate == true) {
 
+                    $affected = DB::table('user_details')
+                    ->where('ud_linking_id', Auth::user()->id)
+                    ->update(['ud_packs_purchased' => $user_block_packs->ud_packs_purchased .','. $new_purchase_string ]);
+            }
+        
+        // return redirect()->action('MarketplaceController@index');
+        return redirect()->action([MarketplaceController::class, 'index']);
     }
 }

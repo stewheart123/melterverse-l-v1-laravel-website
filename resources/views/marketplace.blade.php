@@ -4,24 +4,30 @@
 <div class="container">            
     <div class="marketplace row justify-content-center ">
        
-        @if($available_block_packs)
+        @if( isset($available_block_packs))
+        
             <div class="col-md-12 shadow-sm bg-transparent">
                 <h3 class="text-white">Available packs</h3>
                 <div class="row d-flex flex-wrap flex-row">
-
-                
+                                    
                 @foreach ($available_block_packs as $block_pack)
                 <div class="marketplace__pack_card col-lg-5 card bg-dark bg-gradient text-white d-flex flex-row m-3">
                     <img class="mx-3 my-auto" src="{{$block_pack->bp_image_location}}" width="150" height="150" alt=""/>
                         <div class="d-flex flex-column p-3">
                             <h5>{{$block_pack->bp_display_name}}</h5>
                             <p>{{$block_pack->bp_description}}</p>
-                            <p>$USDC: {{$block_pack->bp_price}}</p>
+                            <p>$USDC: {{$block_pack->bp_price}} (FREE)</p>
                             <p>Downloads: {{$block_pack->bp_total_views}}</p>
-                            <button>Add to my editor</button>
+                            <form action="addBlockPackToAccount" method="POST" enctype="multipart/form-data">
+                                 {{ csrf_field() }}
+           
+                                 <input type = "hidden" name = "pack_id_order" value = "{{$block_pack->bp_id}}" />
+                            <button type="submit" class="btn btn-primary btn-sm">Add to my editor</button>
                         </div>
                     </div>
                 @endforeach
+
+
             </div>
         </div>
         @endif
@@ -33,7 +39,7 @@
 
                 @foreach ($purchased_block_packs as $purchased)
                 <div class="marketplace__pack_card col-lg-5 card bg-dark bg-gradient text-white d-flex flex-row m-3">
-                    <img class="mx-3 my-auto" src="{{$block_pack->bp_image_location}}" width="150" height="150" alt=""/>
+                    <img class="mx-3 my-auto" src="{{$purchased->bp_image_location}}" width="150" height="150" alt=""/>
                         <div class="d-flex flex-column p-3">
                             <h5>{{$purchased->bp_display_name}}</h5>
                             <p>{{$purchased->bp_description}}</p>
