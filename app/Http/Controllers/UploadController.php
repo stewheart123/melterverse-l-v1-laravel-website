@@ -18,25 +18,45 @@ class UploadController extends Controller
 
     public function store(Request $request)
     {
-        Auth::user()->name;
-        $path = public_path( 'bundles\\'. Auth::user()->name . Auth::user()->id . '\test');
+        // add in db query and add file locations, descriptions - fill in new user pack entry...
+        $pack_folder_name = $request->input('folder');
+        // dd($pack_folder_name);
+        //Auth::user()->name;
+        $bundle_path = public_path( 'bundles\\'. Auth::user()->name . Auth::user()->id . '\\' . $pack_folder_name);
 
-        if(!File::isDirectory($path)){
+        $image_path = public_path( 'bundles\\'. Auth::user()->name . Auth::user()->id . '\images');
 
-            File::makeDirectory($path, 0777, true, true);
+        if(!File::isDirectory($bundle_path)){
 
+            File::makeDirectory($bundle_path, 0777, true, true);
+        }
+
+        if(!File::isDirectory($image_path)){
+
+            File::makeDirectory($image_path, 0777, true, true);
         }
         
             $request->validate([
             //application/octet-stream
-            'file' =>  ['required','mimetypes:application/octet-stream'],
+            'folder'      =>  'required',
+            'file'        =>  ['required','mimetypes:application/octet-stream'],
+            'image'       =>  ['required','mimes:jpeg,bmp,png'],
+            'description' =>  'required',
             //'image.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',
             ]);
         if ($file = $request->hasFile('file')) {
              
             $file = $request->file('file') ;
             $fileName = $file->getClientOriginalName() ;
-            $destinationPath = $path ;
+            $destinationPath = $bundle_path ;
+            $file->move($destinationPath,$fileName);
+            //return redirect('/upload');
+        }
+        if ($file = $request->hasFile('image')) {
+             
+            $file = $request->file('image') ;
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = $image_path ;
             $file->move($destinationPath,$fileName);
             //return redirect('/upload');
             $message = "upload successful";

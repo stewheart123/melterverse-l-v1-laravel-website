@@ -4,12 +4,12 @@
 <div class="container">            
     <div class="marketplace row justify-content-center ">
        
-        @if( isset($available_block_packs))
         
-            <div class="col-md-12 shadow-sm bg-transparent">
-                <h3 class="text-white">Available packs</h3>
-                <div class="row d-flex flex-wrap flex-row">
-                                    
+        <div class="col-md-12 shadow-sm bg-transparent">
+            <h3 class="text-white">Available packs</h3>
+            
+                <p>You can create your own packs and <a href="/upload">upload</a> them to the marketplace!</p>
+                <div class="row d-flex flex-wrap flex-row">                                    
                 @foreach ($available_block_packs as $block_pack)
                 <div class="marketplace__pack_card col-lg-5 card bg-dark bg-gradient text-white d-flex flex-row m-3">
                     <img class="mx-3 my-auto" src="{{$block_pack->bp_image_location}}" width="150" height="150" alt=""/>
@@ -30,7 +30,6 @@
 
             </div>
         </div>
-        @endif
         
         @if($purchased_block_packs)
             <div class="col-md-12 shadow-sm bg-transparent">
