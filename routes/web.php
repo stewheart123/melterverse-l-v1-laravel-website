@@ -60,10 +60,10 @@ Route::post('/addBlockPackToAccount', [App\Http\Controllers\MarketplaceControlle
 //     return view('marketplace');
 // });
 
-Route::get('/upload', function(){
-    return view('uploadfiles');
-});
-
+// Route::get('/upload', function(){
+//     return view('uploadfiles');
+// });
+Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);
 // Route::get('/uploadfile','UploadController@index');   
 Route::get('/uploadfile', [App\Http\Controllers\UploadController::class, 'index']);
 Route::post('/uploadfile', [App\Http\Controllers\UploadController::class, 'store']);

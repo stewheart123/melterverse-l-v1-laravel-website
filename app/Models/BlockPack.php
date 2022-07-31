@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
 class BlockPack extends Model
 {
 	protected $table = 'block_packs';
-	protected $primaryKey = 'bp_id';
+	//protected $primaryKey = 'bp_id';
 	public $incrementing = false;
 	public $timestamps = false;
 
@@ -42,6 +42,7 @@ class BlockPack extends Model
 	];
 
 	protected $fillable = [
+		'bp_id',
 		'bp_production_name',
 		'bp_display_name',
 		'bp_file_location',

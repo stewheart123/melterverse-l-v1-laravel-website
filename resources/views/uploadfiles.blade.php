@@ -17,7 +17,14 @@
                 <label for="image" class="col-sm-12 col form-label" style="font-weight: bold;">Marketplace photo</label>
                 <input class="mb-3" type="file" class="form-control form-control-sm" name="image">
                 <label for="description" class="col-sm-12 col form-label" style="font-weight: bold;">Unity Asset File</label>
-                <textarea class="mb-3 h-25 col-lg-12" type="text" class="form-control form-control-sm" name="description" ></textarea>
+                <textarea class="mb-3 h-25 col-lg-9" type="text" class="form-control form-control-sm" name="description" ></textarea>
+            
+                <select class="ms-3" name="availability">
+                @foreach($availability as $status)
+                    <option value="{{$status}}">{{$status}}
+                    </option>
+                @endforeach
+                </select>
 
                  
               </div>
