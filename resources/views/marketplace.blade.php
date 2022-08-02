@@ -5,10 +5,10 @@
     <div class="marketplace row justify-content-center ">
        
         
-        <div class="col-md-12 shadow-sm bg-transparent">
+        <div class="col-lg-12 shadow-sm bg-dark bg-gradient my-3 py-3" style="--bs-bg-opacity: .8;">
             <h3 class="text-white">Available packs</h3>
             
-                <p>You can create your own packs and <a href="/upload">upload</a> them to the marketplace!</p>
+                <p class="text-white">You can create your own packs and <a href="/upload">upload</a> them to the marketplace!</p>
                 <div class="row d-flex flex-wrap flex-row">                                    
                 @foreach ($available_block_packs as $block_pack)
                 <div class="marketplace__pack_card col-lg-5 card bg-dark bg-gradient text-white d-flex flex-row m-3">
@@ -32,7 +32,7 @@
         </div>
         
         @if($purchased_block_packs)
-            <div class="col-md-12 shadow-sm bg-transparent">
+            <div class="col-lg-12 shadow-sm bg-dark bg-gradient my-3 py-3" style="--bs-bg-opacity: .8;">
                 <h3 class="text-white">Purchased packs</h3>
                 <div class="row d-flex flex-wrap flex-row">
 
@@ -45,6 +45,32 @@
                             <p>$USDC: {{$purchased->bp_price}}</p>
                             <p>Downloads: {{$purchased->bp_total_views}}</p>
                             <p class="font-italic" >Already available in your editor</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        @endif
+
+        @if($your_created_packs)
+            <div class="col-lg-12 shadow-sm bg-dark bg-warning bg-gradient my-3 py-3" style="--bs-bg-opacity: .8;">
+                <h3 class="text-white">Your created packs</h3>
+                <div class="row d-flex flex-wrap flex-row">
+
+                @foreach ($your_created_packs as $creation)
+                <div class="marketplace__pack_card col-lg-5 card bg-dark bg-gradient text-white d-flex flex-row m-3">
+                    <img class="mx-3 my-auto" src="{{$creation->bp_image_location}}" width="150" height="150" alt=""/>
+                        <div class="d-flex flex-column p-3">
+                            <h5>{{$creation->bp_display_name}}</h5>
+                            <p>{{$creation->bp_description}}</p>
+                            <p>$USDC: {{$creation->bp_price}}</p>
+                            <p>Downloads: {{$creation->bp_total_views}}</p>
+                            <form action="destroyBlockPack" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type = "hidden" name = "block_pack" value = "{{$creation->bp_id}}" />
+                                <button type="submit" class="btn btn-outline-danger">Delete Pack</button>
+                            </form>
+                            
                         </div>
                     </div>
                 @endforeach
@@ -75,7 +101,7 @@
                 <br><br>
 
                 <h4>Custom Avatars</h4>
-                <p>Find unqiue avatars - from the mundane to the abstract</p>
+                <p>Find unqiue avatars - from the formal to the abstract. Human, mech, animal, surreal. </p>
 
                 </div>
             </div>

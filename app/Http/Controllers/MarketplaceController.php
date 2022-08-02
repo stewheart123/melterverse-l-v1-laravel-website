@@ -12,7 +12,9 @@ class MarketplaceController extends Controller
 {
     /**
      * Returns both purchased and available public block packs as arrays
-     *  
+     * 
+     * Create new area for 'my packs - each with an edit button that navigates to an edit page 
+     * will need to pass a page for the instance id or name 
      */
     public function index(){
         
@@ -27,8 +29,10 @@ class MarketplaceController extends Controller
         $purchased_block_packs = DB::table('block_packs')->whereIn('bp_id', $purchase_pack_array )->where('bp_availability','=','public')->get();
         $available_block_packs = DB::table('block_packs')->where('bp_availability','=','public')->whereNotIn('bp_id', $purchase_pack_array)->get();
         //dd($available_block_packs);
+
+        $your_created_packs = DB::table('block_packs')->where('bp_author_id', '=', Auth::user()->id )->get();
         
-        return view('marketplace' , compact('available_block_packs', 'purchased_block_packs'));
+        return view('marketplace' , compact('available_block_packs', 'purchased_block_packs', 'your_created_packs'));
     }
 
     /** 
@@ -62,4 +66,22 @@ class MarketplaceController extends Controller
             }
         return redirect()->action([MarketplaceController::class, 'index']);
     }
+
+    /**
+     
+     * must also delete the file and image locations
+     */
+    public function destroy(Request $request){
+        $block_pack = $request->block_pack;
+        $block_pack_to_delete = BlockPack::where('bp_id', $block_pack)->where('bp_author_id', Auth::user()->id);
+        $block_pack_to_delete->delete();
+        return redirect('marketplace');
+    }
+    /**
+     * NEED TO ADD IN FUNCTION THAT CHECKS EVERY USER DETAILS, REMOVING THE PURCHASED BLOCK PACK ID FROM
+     * PURCHASED BLOCKS AS THEY NO LONGER EXIST
+     * 
+     *
+     */
+     
 }

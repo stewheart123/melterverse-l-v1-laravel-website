@@ -56,13 +56,8 @@ Route::get('/friends', function(){
 
 Route::get('/marketplace', [App\Http\Controllers\MarketplaceController::class,'index']);
 Route::post('/addBlockPackToAccount', [App\Http\Controllers\MarketplaceController::class, 'store']);
-// Route::get('/marketplace', function(){
-//     return view('marketplace');
-// });
+Route::post('/destroyBlockPack', [App\Http\Controllers\MarketplaceController::class, 'destroy']);
 
-// Route::get('/upload', function(){
-//     return view('uploadfiles');
-// });
 Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);
 // Route::get('/uploadfile','UploadController@index');   
 Route::get('/uploadfile', [App\Http\Controllers\UploadController::class, 'index']);

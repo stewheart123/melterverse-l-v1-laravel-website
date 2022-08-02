@@ -12,8 +12,9 @@
                     <img src="images/usd-coin-usdc-logo.png" width="150" height="150" class="float-end"/>
                     <p>Buy custom blocks with USDC</p>
                     <p>Become a creator and sell your own content</p>
-                    <p>Connect an ERC20 wallet such as metamask, and display NFT artwork into your 3D world</p>
-                    <p>Monetise entry to your custom room</p>                     
+                    <p>Connect an ERC20 wallet such as metamask to manage your purchases and income</p>
+                    <p>Buy unique NFT content and integrate into your experience</p>
+                    <p>Monetise entry to your custom room via re-sellable tickets, either as limited or unlimited capacity</p>                     
                 </div>
             </div>
         </div>

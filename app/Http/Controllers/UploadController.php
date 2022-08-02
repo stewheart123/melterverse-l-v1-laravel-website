@@ -14,7 +14,7 @@ class UploadController extends Controller
      */
     public function index()
     {
-        $availability = ['draft' , 'private' , 'public'];
+        $availability = ['public', 'draft' , 'private' ];
         return view('uploadfiles', compact('availability'));
     }
 
@@ -26,7 +26,17 @@ class UploadController extends Controller
         $image_path = public_path( 'bundles\\'. Auth::user()->name . Auth::user()->id . '\images');
         $image_name = $request->file('image');
         $image_name = $image_name->getClientOriginalName();
+        $file_name = $request->file('file');
+        $file_name = $file_name->getClientOriginalName();
         $image_url = '/bundles/'. Auth::user()->name . Auth::user()->id . '/images/' . $image_name;
+        $file_url = '/bundles/'. Auth::user()->name . Auth::user()->id . '/'.$pack_folder_name.'/' . $file_name;
+        
+        $request->validate([
+        'folder'       =>  'required|min:3',
+        'file'         =>  ['required','mimetypes:application/octet-stream'],
+        'image'        =>  ['required','mimes:jpeg,bmp,png'],
+        'description'  =>  'required',
+        ]);
 
         if(!File::isDirectory($bundle_path)){
 
@@ -37,13 +47,6 @@ class UploadController extends Controller
 
             File::makeDirectory($image_path, 0777, true, true);
         }
-
-            $request->validate([
-            'folder'       =>  'required|min:3',
-            'file'         =>  ['required','mimetypes:application/octet-stream'],
-            'image'        =>  ['required','mimes:jpeg,bmp,png'],
-            'description'  =>  'required',
-            ]);
 
         if ($file = $request->hasFile('file')) {
             $file = $request->file('file') ;
@@ -63,7 +66,7 @@ class UploadController extends Controller
                 'bp_production_name'     => $pack_folder_name,
                 'bp_display_name'        => $pack_folder_name,
                 'bp_author_id'           => Auth::user()->id,
-                'bp_file_location'       => $bundle_path,
+                'bp_file_location'       => $file_url,
                 'bp_genre_ids'           => '',
                 'bp_availability'        => $request->input('availability'),
                 'bp_description'         => $request->input('description'),
@@ -75,7 +78,7 @@ class UploadController extends Controller
                 'bp_image_location'      => $image_url
             ]);
 
-            $availability = ['draft' , 'private' , 'public'];
+            $availability = ['public', 'draft' , 'private' ];
             $message = "upload successful";
             
             return view('/uploadfiles')->with([
