@@ -59,10 +59,11 @@ class MarketplaceController extends Controller
                 $user_block_packs->ud_packs_purchased = '';
             }
             if ($notDuplicate == true) {
-
+                $trimmed_purchase_string = $user_block_packs->ud_packs_purchased .','. $new_purchase_string;
+                $trimmed_purchase_string = trim($trimmed_purchase_string , ',');
                 $affected = DB::table('user_details')
                 ->where('ud_linking_id', Auth::user()->id)
-                ->update(['ud_packs_purchased' => $user_block_packs->ud_packs_purchased .','. $new_purchase_string ]);
+                ->update(['ud_packs_purchased' => $trimmed_purchase_string ]);
             }
         return redirect()->action([MarketplaceController::class, 'index']);
     }
@@ -73,8 +74,49 @@ class MarketplaceController extends Controller
      */
     public function destroy(Request $request){
         $block_pack = $request->block_pack;
+        $block_pack_extract_details = DB::table('block_packs')->where('bp_id', $block_pack)->first();
+        
+        $all_users = DB::table('user_details')->get();
+        foreach( $all_users as $user ){
+            $purchase_pack_array = [''];
+            $willUpdate = false;
+            if( $user->ud_packs_purchased ){
+                //splits the string back into an array
+                $purchase_pack_array = explode(',' , $user->ud_packs_purchased );
+                $new_purchase_string = '';
+                    foreach( $purchase_pack_array as $pack_item => $value ){
+                        if( $value == $block_pack ) {
+                            unset($purchase_pack_array[$pack_item]); 
+                           $willUpdate = true; 
+                        }
+                        else {
+                            if($pack_item != (count($purchase_pack_array) -1 ) ){
+                                $new_purchase_string .= $value .',';
+                            } 
+                        }
+                    }
+                    $new_purchase_string = trim($new_purchase_string, ',');
+                    //dd($new_purchase_string);
+                    if( $willUpdate) {
+                        DB::table('user_details')
+                        ->where('ud_linking_id', $user->ud_linking_id)
+                        ->update(['ud_packs_purchased' => $new_purchase_string ]);
+                    }
+            }
+
+        }
+        
+        $array_for_image_name = explode('/',$block_pack_extract_details->bp_image_location);
+        $bundle_image_name = $array_for_image_name[count($array_for_image_name) -1 ];
+        unlink(public_path('bundles\\'. Auth::user()->name . Auth::user()->id . '\images\\'. $bundle_image_name));
+        
+        $array_for_file_name = (explode('/',$block_pack_extract_details->bp_file_location));
+        $bundle_file_name = $array_for_file_name[count($array_for_file_name) -1 ];
+        unlink(public_path('bundles\\'. Auth::user()->name . Auth::user()->id . '\\' . $block_pack_extract_details->bp_display_name.'\\'. $bundle_file_name));
+        rmdir(public_path('bundles\\'. Auth::user()->name . Auth::user()->id . '\\' . $block_pack_extract_details->bp_display_name.'\\'));
         $block_pack_to_delete = BlockPack::where('bp_id', $block_pack)->where('bp_author_id', Auth::user()->id);
         $block_pack_to_delete->delete();
+
         return redirect('marketplace');
     }
     /**
