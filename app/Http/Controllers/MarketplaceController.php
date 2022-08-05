@@ -70,7 +70,8 @@ class MarketplaceController extends Controller
 
     /**
      
-     * must also delete the file and image locations
+     * Deletes files and folders for the block pack
+     * also deletes instances of purchase from each user
      */
     public function destroy(Request $request){
         $block_pack = $request->block_pack;
@@ -84,6 +85,7 @@ class MarketplaceController extends Controller
                 //splits the string back into an array
                 $purchase_pack_array = explode(',' , $user->ud_packs_purchased );
                 $new_purchase_string = '';
+                    // checks each pack id against the one being deleted
                     foreach( $purchase_pack_array as $pack_item => $value ){
                         if( $value == $block_pack ) {
                             unset($purchase_pack_array[$pack_item]); 
@@ -95,8 +97,8 @@ class MarketplaceController extends Controller
                             } 
                         }
                     }
-                    $new_purchase_string = trim($new_purchase_string, ',');
-                    //dd($new_purchase_string);
+                        $new_purchase_string = trim($new_purchase_string, ',');
+                        //if did contain string to be deleted, reconstituted string is updated back into the user detail
                     if( $willUpdate) {
                         DB::table('user_details')
                         ->where('ud_linking_id', $user->ud_linking_id)
@@ -106,10 +108,18 @@ class MarketplaceController extends Controller
 
         }
         
+        /**
+         * deletes image but not image folder as currently used for any pack the user owns -
+         * might need to refactor into the pack folder to avoid breaking links when removing 
+         * image being shared by 2 user packs
+         */
         $array_for_image_name = explode('/',$block_pack_extract_details->bp_image_location);
         $bundle_image_name = $array_for_image_name[count($array_for_image_name) -1 ];
         unlink(public_path('bundles\\'. Auth::user()->name . Auth::user()->id . '\images\\'. $bundle_image_name));
         
+        /**
+         * Removes file and folder
+         */
         $array_for_file_name = (explode('/',$block_pack_extract_details->bp_file_location));
         $bundle_file_name = $array_for_file_name[count($array_for_file_name) -1 ];
         unlink(public_path('bundles\\'. Auth::user()->name . Auth::user()->id . '\\' . $block_pack_extract_details->bp_display_name.'\\'. $bundle_file_name));
@@ -119,11 +129,5 @@ class MarketplaceController extends Controller
 
         return redirect('marketplace');
     }
-    /**
-     * NEED TO ADD IN FUNCTION THAT CHECKS EVERY USER DETAILS, REMOVING THE PURCHASED BLOCK PACK ID FROM
-     * PURCHASED BLOCKS AS THEY NO LONGER EXIST
-     * 
-     *
-     */
      
 }

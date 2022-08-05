@@ -83,7 +83,7 @@ class UploadController extends Controller
             
             return view('/uploadfiles')->with([
                 'message' => $message,
-                'availability' => $availability            
+                'availability' => $availability
             ]);
         
         }       
