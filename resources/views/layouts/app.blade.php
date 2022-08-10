@@ -20,9 +20,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="background-image:url('images/melter-concepts.webp');">
+<body style="background-image:url('images/neon-city-nighttime.png'); background-attachment: fixed;
+ margin-top: 5rem;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-sm ">
+        <nav class="navbar navbar-expand-md bg-dark shadow-sm fixed-top">
             <div class="container">
                 <a class="navbar-brand text-info" href="{{ url('/') }}">
                  <strong>{{ config('app.name', 'Melterverse v-1') }}</strong><em> | prototype the future</em>
@@ -59,7 +60,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link fs-4" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
