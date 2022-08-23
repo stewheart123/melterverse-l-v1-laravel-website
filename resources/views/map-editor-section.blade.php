@@ -41,11 +41,11 @@
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Symfony Test Build 1.loader.js";
+      var loaderUrl = buildUrl + "/BUILDS.loader.js";
       var config = {
-        dataUrl: buildUrl + "/Symfony Test Build 1.data",
-        frameworkUrl: buildUrl + "/Symfony Test Build 1.framework.js",
-        codeUrl: buildUrl + "/Symfony Test Build 1.wasm",
+        dataUrl: buildUrl + "/BUILDS.data",
+        frameworkUrl: buildUrl + "/BUILDS.framework.js",
+        codeUrl: buildUrl + "/BUILDS.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Map Editor GL",

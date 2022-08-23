@@ -1,0 +1,16 @@
+ManifestFileVersion: 0
+CRC: 2986294574
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: testbundle
+      Dependencies: {}
+    Info_1:
+      Name: secondtest
+      Dependencies: {}
+    Info_2:
+      Name: bundlethree
+      Dependencies: {}
+    Info_3:
+      Name: redcube
+      Dependencies: {}
