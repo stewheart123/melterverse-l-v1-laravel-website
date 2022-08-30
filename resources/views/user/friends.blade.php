@@ -7,7 +7,7 @@
             <div class="card bg-dark bg-gradient text-white">
                 <div class="card-header"><h1>Build Your Community</h1></div>
                 <div class="card-body">                    
-                    <h3>Friends - Coming soon</h3>
+                    <h3>Friends</h3>
                     <p>Curate your group of friends - only the chosen can view your rooms with the  'private' access modifier.</p>
                     <p>Create access groups for spaces you collectively own and hangout in - build as a team!</p>
                     <p>Share, gift, and recieve 3D blocks and treasure chest items</p>

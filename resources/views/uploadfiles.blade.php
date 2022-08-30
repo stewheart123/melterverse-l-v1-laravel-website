@@ -4,8 +4,9 @@
     <div class="row">
         <div class="p-3 col-lg-8 card bg-dark bg-gradient text-white">
         <h5 class="m-0">Upload to the Marketplace</h5>
+        <p>This feature is still at an experimental stage, tutorial will accompany this eventually.</p>
     <hr>
-    <form action="/uploadfile" method="post" enctype="multipart/form-data">
+    <form action="/uploadfile" method="post" enctype="multipart/form-data" class="d-none">
      {{ csrf_field() }}
           <div class="form-group row">
               <div class="col-lg-12 p-3">

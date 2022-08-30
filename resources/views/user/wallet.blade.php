@@ -7,7 +7,7 @@
             <div class="card bg-dark bg-gradient text-white">
                 <div class="card-header"><h1>Crypto Integration</h1></div>
                 <div class="card-body">                    
-                    <h3>Wallet - Coming soon</h3>
+                    <h3>Wallet</h3>
 
                     <img src="images/usd-coin-usdc-logo.png" width="150" height="150" class="float-end"/>
                     <p>Buy custom blocks with USDC</p>

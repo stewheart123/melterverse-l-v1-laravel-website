@@ -13,15 +13,20 @@
     <div class="col-12">
     <div class="card bg-dark bg-gradient text-white">
         <div class="card-header"><h1>Build Your World</h1></div>
+        @if (!Auth::check())
+        <p class="ms-4">create an account and login to save you maps</p>
+        @endif
+        @if (Auth::check())              
           <div class="card-body">
             <form action="token" method="POST" class="pb-2">
-              To access your custom Melter Blocks, request a token. In the login screen type in the token and email fields.
+              To access your custom Melter Blocks, request a token. In the login screen type in the token.
               <br><br>
               Click 'Ignore' in the editor to use the default Melter Blocks. 
               <button type="submit">create access token</button>
               @csrf
             </form>
             <h3 class="info-text">{!! !empty($token_return_string) ? $token_return_string : "click 'create access token' " !!} </h3>
+            @endif
             <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600></canvas>
       <div id="unity-loading-bar">
@@ -41,15 +46,15 @@
     </div>
     <script>
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/BUILDS.loader.js";
+      var loaderUrl = buildUrl + "/Laravel Build 1.loader.js";
       var config = {
-        dataUrl: buildUrl + "/BUILDS.data",
-        frameworkUrl: buildUrl + "/BUILDS.framework.js",
-        codeUrl: buildUrl + "/BUILDS.wasm",
+        dataUrl: buildUrl + "/Laravel Build 1.data",
+        frameworkUrl: buildUrl + "/Laravel Build 1.framework.js",
+        codeUrl: buildUrl + "/Laravel Build 1.wasm",
         streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
+        companyName: "Melterverse",
         productName: "Map Editor GL",
-        productVersion: "0.2",
+        productVersion: "0.3",
       };
 
       var container = document.querySelector("#unity-container");
@@ -102,6 +107,26 @@
     </div>
   </div>
 </div>
-
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <div class="card bg-dark bg-gradient text-white p-5">
+        <h3>Controls</h3>
+        <p class="text-info">Navigate Map<span class="text-white"> AWSD / directional keys</span></p>
+        <p class="text-info">Rotate Map<span class="text-white"> Q</span></p>
+        <p class="text-info">Plot Block onto map<span class="text-white"> Left Mouse Button</span></p>
+        <p class="text-info">Rotate Block<span class="text-white"> Right Mouse Button</span></p>
+        <p class="text-info">Delete a block<span class="text-white"> click 'remove' button, then click on blocks to delete</span></p>
+        <p class="text-info">Increase X axis of block<span class="text-white"> 0</span></p>
+        <p class="text-info">Increase Z axis of block<span class="text-white"> 8</span></p>
+        <p class="text-info">Increase Y axis of block<span class="text-white"> 9</span></p>
+        <p class="text-info">Decrease X axis of block<span class="text-white"> 0 + shift</span></p>
+        <p class="text-info">Decrease Z axis of block<span class="text-white"> 8 + shift</span></p>
+        <p class="text-info">Decrease Y axis of block<span class="text-white"> 9 + shift</span></p>
+        <p class="text-info">Increase altitude of block<span class="text-white"> P or 'up UI button'</span></p>
+        <p class="text-info">Decrease altitude of block<span class="text-white"> L or 'down UI button'</span></p>
+      </div>
+    </div>
+    </div>
 
 @endsection
