@@ -4,6 +4,9 @@
 // Variables
 @import 'variables';
 
+//marketplace
+@import 'marketplace';
+
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
@@ -11,4 +14,12 @@ body {
     
     background-size: cover;
     width: 100%;
+}
+.marketplace {
+    &__pack_card {
+        img{
+            object-fit: cover;
+        }
+
+    }
 }

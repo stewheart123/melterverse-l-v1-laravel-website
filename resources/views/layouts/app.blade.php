@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title')</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -15,17 +15,29 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    @yield('head')
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body style="background-image:url('images/melter-concepts.webp');">
+<body style="background-image:url('images/neon-city-nighttime.png'); background-attachment: fixed;
+ margin-top: 5rem;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-dark shadow-sm ">
+        <nav class="navbar navbar-expand-md bg-dark shadow-sm fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                 <strong>{{ config('app.name', 'Melterverse v-1') }}</strong><em> ~ prototype the future</em>
-                </a>
+                <a class="navbar-brand text-info" href="{{ url('/') }}">
+                 <strong>{{ config('app.name', 'Melterverse v-1') }}</strong><em> | prototype the future</em>
+                </a>   
+                <a class="navbar-brand" href="/news">News</a>7
+                <a class="navbar-brand" href="/instructions">FAQ</a>
+                <a class="navbar-brand" href="/maps">Maps</a>
+                <a class="navbar-brand" href="/friends">Friends</a>
+                <a class="navbar-brand" href="/wallet">Wallet</a>
+                @if (Auth::check())              
+                <a class="navbar-brand" href="/marketplace">Marketplace</a>
+                    <a class="navbar-brand" href="/upload">Upload</a>
+                @endif
+                    <a class="navbar-brand text-danger" href="/map-editor-new">Build</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -48,7 +60,7 @@
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link fs-4" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
                         @else
@@ -77,6 +89,8 @@
 
         <main class="py-4">        
             @yield('content')
+            @yield('game-content')
+            @yield('uploadfiles')
         </main>
     </div>
 </body>

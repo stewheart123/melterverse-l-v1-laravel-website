@@ -14,21 +14,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('/home');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/hello', function() {
-    $usdc = "15";
+//Route::get('/hello', [App\Http\Controllers\HelloController::class,'index']);
 
-    return view('hello' , compact('usdc'));
-});
+Route::post('token', [App\Http\Controllers\MapToken::class, 'CreateMapToken']);
 
 Route::get('/map-editor', function(){
     return view('web-gl');
+});
+
+Route::get('/map-editor-new', function(){
+    return view('map-editor-section');
 });
 
 Route::get('/news', function(){
@@ -51,3 +54,11 @@ Route::get('/friends', function(){
     return view('user/friends');
 });
 
+Route::get('/marketplace', [App\Http\Controllers\MarketplaceController::class,'index']);
+Route::post('/addBlockPackToAccount', [App\Http\Controllers\MarketplaceController::class, 'store']);
+Route::post('/destroyBlockPack', [App\Http\Controllers\MarketplaceController::class, 'destroy']);
+
+Route::get('/upload', [App\Http\Controllers\UploadController::class,'index']);
+// Route::get('/uploadfile','UploadController@index');   
+Route::get('/uploadfile', [App\Http\Controllers\UploadController::class, 'index']);
+Route::post('/uploadfile', [App\Http\Controllers\UploadController::class, 'store']);

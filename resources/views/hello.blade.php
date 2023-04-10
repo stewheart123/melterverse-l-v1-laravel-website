@@ -1,3 +1,3 @@
 
 <h1>hello</h1>
-<p>{{$usdc}}</p>
+<p>{{$db_return}}</p>
